@@ -5,12 +5,14 @@
 using namespace std;
 
 class Board {
-private:
-    char board[8][8];  
+    private:
+        char grid[8][8];
 
-public:
-    Board();  
-    void printBoard();  
+    public:
+        Board();
+            void createBoard();
+            char getGrid(int row, int col);
+            friend std::ostream& operator<<(std::ostream &out, Board &board);
 };
 
 #endif
