@@ -10,12 +10,9 @@ int main() {
     Board board;
     string input;
     bool gameRunning = true;
+    board.initializeBoard();
 
-    board.setPiece(0, 0, new Rook('w'));
-    board.setPiece(0, 7, new Rook('w'));
-    board.setPiece(7, 0, new Rook('b'));
-    board.setPiece(7, 7, new Rook('b'));
-
+    char currentTurn = 'w';
     while (gameRunning) {
 
         getline(cin, input);
@@ -33,17 +30,23 @@ int main() {
         }
         else if (command == "move") {
             int startRow, startCol, rowToReach, colToReach;
+    
             if (!(ss >> startRow >> startCol >> rowToReach >> colToReach)) {
                 cout << "sjnscjknosn"; // D
                 continue;
             }
 
             if (startRow < 0 || startRow > 7 || startCol < 0 || startCol > 7 || rowToReach < 0 || rowToReach > 7 || colToReach < 0 || colToReach > 7) {
-                cout << "000000000000";// D
+                cout << "Give value between 0 to 7";// D
                 continue;
             }
-
+            
             Piece* piece = board.getPiece(startRow, startCol);
+
+            if (piece->getColour() != currentTurn){
+                cout << "NOT MY TURN.\n";
+                continue;
+            }
             if (piece == nullptr) {
                 cout << "No piece at " << startRow << " " << startCol << endl;
                 continue;
@@ -62,6 +65,11 @@ int main() {
                 board.setPiece(startRow, startCol, nullptr);
                 cout << "Move successful!" << endl;// D
                 cout << board;
+                if (currentTurn == 'w') {
+                    currentTurn = 'b';  
+                } else {
+                    currentTurn = 'w';  
+                }
             } else {
                 cout << "Invalid move";
             }
@@ -72,3 +80,4 @@ int main() {
     }
     return 0;
 }
+// if a peice is moved from x to y then y should be freed 

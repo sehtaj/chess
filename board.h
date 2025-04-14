@@ -12,6 +12,7 @@ class Board{
 public:
     Board();
     ~Board();
+    void initializeBoard();
     void clearBoard(); 
     Piece* getPiece(int row, int col);
     void setPiece(int row, int col, Piece* piece);

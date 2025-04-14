@@ -13,6 +13,13 @@ Board::~Board(){
     clearBoard();
 }
 
+void Board::initializeBoard(){
+    setPiece(0, 0, new Rook('w'));
+    setPiece(0, 7, new Rook('w'));
+    setPiece(7, 0, new Rook('b'));
+    setPiece(7, 7, new Rook('b'));
+}
+
 void Board::clearBoard(){
     for(int i = 0; i < 8; ++i){
         for(int j = 0; j < 8; ++j){
