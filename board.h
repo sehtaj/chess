@@ -2,17 +2,22 @@
 #define BOARD_H
 
 #include <iostream>
+#include "piece.h"
+
 using namespace std;
 
-class Board {
-    private:
-        char grid[8][8];
+class Board{
+    Piece* grid[8][8]; 
 
-    public:
-        Board();
-            void createBoard();
-            char getGrid(int row, int col);
-            friend std::ostream& operator<<(std::ostream &out, Board &board);
+public:
+    Board();
+    ~Board();
+    void createBoard(); 
+    void clearBoard(); 
+    Piece* getPiece(int row, int col);
+    void setPiece(int row, int col, Piece* piece);
+    void removePiece(int row, int col);
+    void print(); 
+    friend std::ostream& operator<<(std::ostream &out, Board &board);
 };
-
 #endif
