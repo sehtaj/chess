@@ -12,12 +12,10 @@ class Board{
 public:
     Board();
     ~Board();
-    void createBoard(); 
     void clearBoard(); 
     Piece* getPiece(int row, int col);
     void setPiece(int row, int col, Piece* piece);
     void removePiece(int row, int col);
-    void print(); 
-    friend std::ostream& operator<<(std::ostream &out, Board &board);
+    friend ostream& operator<<(ostream &out, Board &board);
 };
 #endif

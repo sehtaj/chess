@@ -39,7 +39,7 @@ void Board::removePiece(int row, int col){
     }
 }
 
-std::ostream& operator<<(std::ostream &out, Board &board){
+ostream& operator<<(ostream &out, Board &board){
     for(int row = 7; row >= 0; row--){
         out << row + 1 << " ";
         for(int col = 0; col < 8; col++){

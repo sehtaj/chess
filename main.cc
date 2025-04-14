@@ -4,8 +4,6 @@
 #include "board.h"
 #include "rook.h"
 
-using namespace std;
-
 // display, quit, move startRow startCol rowToReach colToReach
 
 int main() {
