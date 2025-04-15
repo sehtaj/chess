@@ -1,5 +1,7 @@
 #include "board.h"
 #include "rook.h"
+#include "bishop.h"
+#include "queen.h"
 
 Board::Board(){
     for(int i = 0; i < 8; ++i){
@@ -18,6 +20,12 @@ void Board::initializeBoard(){
     setPiece(0, 7, new Rook('w'));
     setPiece(7, 0, new Rook('b'));
     setPiece(7, 7, new Rook('b'));
+    setPiece(0, 2, new Bishop('w'));
+    setPiece(0, 5, new Bishop('w'));
+    setPiece(7, 2, new Bishop('b'));
+    setPiece(7, 5, new Bishop('b'));
+    setPiece(0, 3, new Queen('w'));
+    setPiece(7, 3, new Queen('b'));
 }
 
 void Board::clearBoard(){

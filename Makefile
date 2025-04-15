@@ -1,12 +1,16 @@
 CXX = g++
-CXXFLAGS = -Wall -std=c++14
+CXXFLAGS = -std=c++17 -Wall -Wextra -g
 
-all: test
+OBJS = main.o board.o rook.o bishop.o queen.o piece.o
 
-test: main.o board.o piece.o rook.o gamestate.o player.o
-	$(CXX) $(CXXFLAGS) -o test main.o board.o piece.o rook.o gamestate.o player.o
+EXEC = chess
 
-main.o: main.cc board.h piece.h rook.h gamestate.h player.h
+all: $(EXEC)
+
+$(EXEC): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(EXEC) $(OBJS)
+
+main.o: main.cc board.h rook.h bishop.h queen.h piece.h
 	$(CXX) $(CXXFLAGS) -c main.cc
 
 board.o: board.cc board.h piece.h
@@ -15,14 +19,14 @@ board.o: board.cc board.h piece.h
 piece.o: piece.cc piece.h
 	$(CXX) $(CXXFLAGS) -c piece.cc
 
-rook.o: rook.cc rook.h piece.h
+rook.o: rook.cc rook.h piece.h board.h
 	$(CXX) $(CXXFLAGS) -c rook.cc
 
-gamestate.o: gamestate.cc gamestate.h board.h player.h
-	$(CXX) $(CXXFLAGS) -c gamestate.cc
+bishop.o: bishop.cc bishop.h piece.h board.h
+	$(CXX) $(CXXFLAGS) -c bishop.cc
 
-player.o: player.cc player.h
-	$(CXX) $(CXXFLAGS) -c player.cc
+queen.o: queen.cc queen.h piece.h board.h
+	$(CXX) $(CXXFLAGS) -c queen.cc
 
 clean:
-	rm -f *.o test
+	rm -f *.o $(EXEC)

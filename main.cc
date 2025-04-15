@@ -3,6 +3,7 @@
 #include <sstream>
 #include "board.h"
 #include "rook.h"
+#include "bishop.h"
 
 // display, quit, move startRow startCol rowToReach colToReach
 
@@ -43,14 +44,16 @@ int main() {
             
             Piece* piece = board.getPiece(startRow, startCol);
 
-            if (piece->getColour() != currentTurn){
-                cout << "NOT MY TURN.\n";
-                continue;
-            }
             if (piece == nullptr) {
                 cout << "No piece at " << startRow << " " << startCol << endl;
                 continue;
             }
+
+            if (piece->getColour() != currentTurn){
+                cout << "NOT MY TURN.\n";
+                continue;
+            }
+            
 
             if (piece->canMove(board, startRow, startCol, rowToReach, colToReach)) {
                 Piece* target = board.getPiece(rowToReach, colToReach);

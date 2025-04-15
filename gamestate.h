@@ -3,6 +3,7 @@
 
 #include "board.h"
 #include "player.h"
+#include<map>
 
 class GameState{
 private:
@@ -13,6 +14,7 @@ private:
     bool check;            
     bool checkmate;        
     bool stalemate;        
+    map<char, int> fileToCol;
 
 public:
     GameState(Board* board, Player* whitePlayer, Player* blackPlayer);
@@ -29,6 +31,7 @@ public:
     void blackWins(); 
     bool isGameOver(); 
     Player* getCurrentPlayer(); 
+    bool getRowCol(const std::string& pos, int& row, int& col);
 };
 
 #endif
