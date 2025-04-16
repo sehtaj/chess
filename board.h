@@ -7,7 +7,7 @@
 using namespace std;
 
 class Board{
-    Piece* grid[8][8]; 
+    Piece* grid[9][9]; 
 
 public:
     Board();
@@ -17,6 +17,7 @@ public:
     Piece* getPiece(int row, int col);
     void setPiece(int row, int col, Piece* piece);
     void removePiece(int row, int col);
+    int getColIndex(const char& col);
     friend ostream& operator<<(ostream &out, Board &board);
 };
 #endif

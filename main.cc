@@ -2,10 +2,9 @@
 #include <string>
 #include <sstream>
 #include "board.h"
-#include "rook.h"
-#include "bishop.h"
+#include "gamestate.h"
 
-// display, quit, move startRow startCol rowToReach colToReach
+// display, quit, move from to
 
 int main() {
     Board board;
@@ -30,15 +29,22 @@ int main() {
             cout << board;
         }
         else if (command == "move") {
-            int startRow, startCol, rowToReach, colToReach;
-    
-            if (!(ss >> startRow >> startCol >> rowToReach >> colToReach)) {
-                cout << "sjnscjknosn"; // D
+            string from, to;
+            ss >> from >> to;
+
+            if (from.size() != 2 || to.size() != 2) {
+                cout << "invalid format of input\n";
                 continue;
             }
 
-            if (startRow < 0 || startRow > 7 || startCol < 0 || startCol > 7 || rowToReach < 0 || rowToReach > 7 || colToReach < 0 || colToReach > 7) {
-                cout << "Give value between 0 to 7";// D
+            int startCol = board.getColIndex(from[0]);
+            int startRow = from[1] - '0';               
+            int colToReach = board.getColIndex(to[0]);  
+            int rowToReach = to[1] - '0';  
+            
+        
+            if (startRow < 1 || startRow > 8 || rowToReach < 1 || rowToReach > 8) {
+                cout << "Out of bounds\n";
                 continue;
             }
             
@@ -50,11 +56,10 @@ int main() {
             }
 
             if (piece->getColour() != currentTurn){
-                cout << "NOT MY TURN.\n";
+                cout << "NOT YOUR TURN.\n";
                 continue;
             }
             
-
             if (piece->canMove(board, startRow, startCol, rowToReach, colToReach)) {
                 Piece* target = board.getPiece(rowToReach, colToReach);
                 if (target) {
@@ -74,13 +79,12 @@ int main() {
                     currentTurn = 'w';  
                 }
             } else {
-                cout << "Invalid move";
+                cout << "Invalid move\n";
             }
         }
         else {
-            cout << "Unknown command "<< endl;
+            cout << "Unknown command\n"<< endl;
         }
     }
     return 0;
 }
-// if a peice is moved from x to y then y should be freed 

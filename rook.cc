@@ -10,7 +10,7 @@ bool Rook::canMove(Board &board, int startRow, int startCol, int endRow, int end
         return false;
     }
     
-    if(endRow < 0 || endRow> 7 || endCol < 0 || endCol > 7){
+    if(endRow < 1 || endRow > 8 || endCol < 1 || endCol > 8){
         return false;
     }
     
