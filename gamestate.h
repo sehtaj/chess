@@ -3,7 +3,6 @@
 
 #include "board.h"
 #include "player.h"
-#include <map>
 
 class GameState{
 private:
@@ -24,11 +23,8 @@ public:
     bool isCheckmate(); 
     bool isStalemate(); 
     void resign(); 
-    void updateGameState(); 
-    void printState();
     void whiteWins(); 
     void blackWins(); 
-    bool isGameOver(); 
     Player* getCurrentPlayer(); 
 };
 #endif

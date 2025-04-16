@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -g
 
-OBJS = main.o board.o rook.o bishop.o queen.o knight.o pawn.o king.o piece.o
+OBJS = main.o board.o rook.o bishop.o queen.o knight.o pawn.o king.o piece.o gamestate.o player.o human.o
 
 EXEC = chess
 
@@ -10,7 +10,7 @@ all: $(EXEC)
 $(EXEC): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(EXEC) $(OBJS)
 
-main.o: main.cc board.h rook.h bishop.h queen.h knight.h pawn.h king.h piece.h
+main.o: main.cc board.h rook.h bishop.h queen.h knight.h pawn.h king.h piece.h gamestate.h human.h
 	$(CXX) $(CXXFLAGS) -c main.cc
 
 board.o: board.cc board.h piece.h rook.h bishop.h queen.h knight.h pawn.h king.h

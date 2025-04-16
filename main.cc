@@ -3,6 +3,8 @@
 #include <sstream>
 #include "board.h"
 #include "gamestate.h"
+#include "human.h"
+#include "player.h"
 
 // display, quit, move from to
 
@@ -12,6 +14,27 @@ int main() {
     bool gameRunning = true;
     board.initializeBoard();
 
+    cout << "Choose game mode: (1) Human vs Human (2) Human vs Computer: ";
+    int choice;
+    cin >> choice;
+
+    Player* whitePlayer;
+    Player* blackPlayer;
+
+    if (choice == 1) {
+        whitePlayer = new Human('w');
+        blackPlayer = new Human('b');
+    // } else if (choice == 2) {
+    //     // Human vs Computer
+    //     whitePlayer = new Human('w');
+    //     blackPlayer = new Computer('b');  
+    } else {
+        cout << "Invalid choice, exiting...\n";
+        return 1;  
+    }
+
+    GameState gameState(&board, whitePlayer, blackPlayer);
+    
     char currentTurn = 'w';
     while (gameRunning) {
 
@@ -73,11 +96,6 @@ int main() {
                 board.setPiece(startRow, startCol, nullptr);
                 cout << "Move successful!" << endl;// D
                 cout << board;
-                if (currentTurn == 'w') {
-                    currentTurn = 'b';  
-                } else {
-                    currentTurn = 'w';  
-                }
             } else {
                 cout << "Invalid move\n";
             }
