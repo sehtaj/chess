@@ -2,7 +2,7 @@
 #define BOARD_H
 
 #include <iostream>
-#include "piece.h"
+#include "pieces/piece.h"
 
 using namespace std;
 

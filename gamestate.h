@@ -9,10 +9,7 @@ private:
     Board* board;         
     Player* whitePlayer;  
     Player* blackPlayer;  
-    Player* currentPlayer; 
-    bool check;            
-    bool checkmate;        
-    bool stalemate;        
+    Player* currentPlayer;        
 
 public:
     GameState(Board* board, Player* whitePlayer, Player* blackPlayer);
@@ -26,5 +23,6 @@ public:
     void whiteWins(); 
     void blackWins(); 
     Player* getCurrentPlayer(); 
+    bool processMove(string from, string to, char currentTurn);
 };
 #endif

@@ -1,10 +1,10 @@
 #include "board.h"
-#include "rook.h"
-#include "bishop.h"
-#include "queen.h"
-#include "knight.h"
-#include "pawn.h"
-#include "king.h"
+#include "pieces/rook.h"
+#include "pieces/bishop.h"
+#include "pieces/queen.h"
+#include "pieces/knight.h"
+#include "pieces/pawn.h"
+#include "pieces/king.h"
 
 Board::Board(){
     for(int i = 1; i <= 8; ++i){
