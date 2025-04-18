@@ -1,4 +1,8 @@
 #include "gamestate.h"
+#include "pieces/rook.h"
+#include "pieces/bishop.h"
+#include "pieces/queen.h"
+#include "pieces/knight.h"
 
 GameState::GameState(Board* board, Player* whitePlayer, Player* blackPlayer)
     : board(board), whitePlayer(whitePlayer), blackPlayer(blackPlayer){
@@ -178,6 +182,36 @@ bool GameState::processMove(string from, string to, char currentTurn){
     board->setPiece(rowToReach, colToReach, piece);
     board->setPiece(startRow, startCol, nullptr);
 
+    char type = piece->getType();
+    if((type == 'P' && rowToReach == 8) ||(type == 'p' && rowToReach == 1)){
+        char choice;
+        cout << "Pawn reached at end. Choose a new piece to replace(q, r, b, h)";
+        cin >> choice;
+
+        Piece* newPiece = nullptr;
+        char color = piece->getColour();
+
+        if(choice == 'q'){
+            newPiece = new Queen(color);
+        } 
+        else if(choice == 'r'){
+            newPiece = new Rook(color);
+        } 
+        else if(choice == 'b'){
+            newPiece = new Bishop(color);
+        } 
+        else if(choice == 'n'){
+            newPiece = new Knight(color);
+        } 
+        else{
+            cout << "Invalid choice.\n";
+        }
+
+        delete piece;
+        piece = newPiece;
+        board->setPiece(rowToReach, colToReach, piece); 
+    }
+
     if(isCheck()){
         board->setPiece(startRow, startCol, piece);
         board->setPiece(rowToReach, colToReach, target);
@@ -200,8 +234,15 @@ bool GameState::processMove(string from, string to, char currentTurn){
         return true;
     }
 
-    if(target && target->getColour() != piece->getColour()){
+    if (target && target->getColour() != piece->getColour()) {
         cout << "Captured " << target->getColour() << " " << target->getType() << "\n";
+    
+        char capturedType = target->getType();
+        if (currentTurn == 'w') {
+            whiteCaptured.push_back(tolower(capturedType));
+        } else {
+            blackCaptured.push_back(toupper(capturedType));
+        }
     }
 
     cout << "Move successful!\n";
@@ -235,4 +276,26 @@ void GameState::whiteWins(){
 
 void GameState::blackWins(){
     cout << "Black Wins\n";
+}
+
+void GameState::displayCaptured(){
+    cout << "White has captured: ";
+    if(whiteCaptured.size() > 0){
+        for(int i = 0; i < whiteCaptured.size(); ++i){
+            cout << whiteCaptured[i] << ' ';
+        }
+    } else{
+        cout << "None";
+    }
+    cout << '\n';
+
+    cout << "Black has captured: ";
+    if(blackCaptured.size() > 0){
+        for(int i = 0; i < blackCaptured.size(); ++i){
+            cout << blackCaptured[i] << ' ';
+        }
+    } else{
+        cout << "None";
+    }
+    cout << '\n';
 }

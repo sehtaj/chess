@@ -50,10 +50,10 @@ int main() {
             cout << board;
         }
         else if (command == "move") {
-            string from, to;
+            string from, to; 
             ss >> from >> to;
-        
-            Player* currentPlayer = gameState.getCurrentPlayer();
+
+            Player* currentPlayer = gameState.getCurrentPlayer();    
             if (currentPlayer->makeMove(from, to)) {
                 if (gameState.processMove(from, to, currentPlayer->getColor())) {
                     if (gameState.isCheckmate()) {
@@ -68,6 +68,11 @@ int main() {
             }
         
         }
+
+        else if(command == "captured") {
+            gameState.displayCaptured();
+        }
+
         else if (command == "resign") {
             Player* currentPlayer = gameState.getCurrentPlayer();
             gameState.resign();  

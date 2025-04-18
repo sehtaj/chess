@@ -9,7 +9,9 @@ private:
     Board* board;         
     Player* whitePlayer;  
     Player* blackPlayer;  
-    Player* currentPlayer;        
+    Player* currentPlayer;     
+    vector<char> whiteCaptured; 
+    vector<char> blackCaptured; 
 
 public:
     GameState(Board* board, Player* whitePlayer, Player* blackPlayer);
@@ -24,5 +26,6 @@ public:
     void blackWins(); 
     Player* getCurrentPlayer(); 
     bool processMove(string from, string to, char currentTurn);
+    void displayCaptured();
 };
 #endif
